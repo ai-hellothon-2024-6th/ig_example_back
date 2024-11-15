@@ -43,17 +43,17 @@ def get_comments(media_id: str, access_token: str) -> dict:
     url = f"https://graph.instagram.com/{media_id}/comments"
     params = {
         "access_token": access_token,
-        "fields": ",".join(["id", "text", "timestamp", "username"])
+        "fields": ",".join(["id", "text", "timestamp", "from", "parent_id"])
     }
     response = requests.get(url, params=params)
     response.raise_for_status()
     return response.json()
 
-def reply_comment(comment_id: str, comment: str, access_token: str) -> dict:
+def reply_comment(comment_id: str, message: str, access_token: str) -> dict:
     url = f"https://graph.instagram.com/{comment_id}/replies"
     data = {
         "access_token": access_token,
-        "message": comment
+        "message": message
     }
     response = requests.post(url, params=data)
     response.raise_for_status()
