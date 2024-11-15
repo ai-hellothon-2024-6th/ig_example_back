@@ -53,8 +53,8 @@ def reply_comment(comment_id: str, comment: str, access_token: str) -> dict:
     url = f"https://graph.instagram.com/{comment_id}/replies"
     data = {
         "access_token": access_token,
-        "text": comment
+        "message": comment
     }
-    response = requests.post(url, data=data)
+    response = requests.post(url, params=data)
     response.raise_for_status()
     return response.json()
