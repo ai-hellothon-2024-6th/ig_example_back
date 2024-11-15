@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Response
 
-from src.models import CodeDTO, AccessTokenDTO
+from src.models import *
 from src.api import *
 
 router = APIRouter()
@@ -48,10 +48,12 @@ def media(user_id: str, access_token: str):
         )
     return result
 
-@router.get("/reply")
-def reply(comment_id: str, comment: str, access_token: str):
+@router.post("/reply")
+def reply(dto: ReplyDTO):
     try:
-        result = reply_comment(comment_id, comment, access_token)
+        print(1)
+        result = reply_comment(dto.comment_id, dto.message, dto.access_token)
+        print(2)
     except HTTPError as e:
         return Response(
             content=e.response.text,

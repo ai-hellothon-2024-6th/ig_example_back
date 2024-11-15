@@ -12,3 +12,8 @@ class AccessTokenDTO(BaseModel):
 
 class CodeDTO(BaseModel):
     code: str
+
+class ReplyDTO(BaseModel):
+    comment_id: str
+    message: str
+    access_token: str
